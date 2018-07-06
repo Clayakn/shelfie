@@ -1,3 +1,3 @@
 UPDATE products
-SET product_name = $2, image_url = $3, price =$4
+SET price = $2
 WHERE id = $1

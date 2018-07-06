@@ -9,9 +9,7 @@ export default class Form extends Component {
                 imageUrl: '',
                 name: '',
                 price: 0,
-                products: props.products,
-                selectProductId: props.selectProduct.id, 
-                editing: false
+                products: props.products
             }
     }
 
@@ -48,19 +46,10 @@ export default class Form extends Component {
             this.props.getProducts();
     }
 
-    // componentDidUpdate(id){
-    //     if ()
-    // }
 
-    updateList = (id) => {
-        axios.put(`/api/products/${id}`, {name, imageUrl, price}).then(response => {
-        })
-        this.cancel();
-        this.props.getProducts();
-    } 
+    
 
     render(){
-        const editing = this.state.editing;
         return (
             <div className='container'>
                 <div className="form">
@@ -75,7 +64,7 @@ export default class Form extends Component {
                     <input className="formInput" placeholder="Insert Price Here" onChange={e => this.changePrice(e.target.value)} value={this.state.price}></input>
                     <div className="form_button_box">
                         <button className="form_button" onClick={() => this.cancel()}>Cancel</button> 
-                        {editing ? <button className="form_button" onClick={() => this.state.updateList()}> Save Changes</button> : <button className="form_button" onClick={() => this.addInventory(this.state.imageUrl, this.state.name, this.state.price)}>Add to Inventory</button>}
+                        <button className="form_button" onClick={() => this.addInventory(this.state.imageUrl, this.state.name, this.state.price)}>Add to Inventory</button>
                     </div>
                 </div>
             </div>

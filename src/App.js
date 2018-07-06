@@ -11,9 +11,11 @@ class App extends Component {
     super(); 
       this.state={
         products:[],
-        selectProduct: ''
+        price: '',
+        id: ''
       }
     this.getProducts = this.getProducts.bind(this)
+    this.updateProduct = this.updateProduct.bind(this)
   }
 
   // Axios Get (Read)
@@ -34,14 +36,38 @@ class App extends Component {
     })
   }
 
+  // Axios Put (Update)
+  updateProduct = (id, price) => {
+    axios.put(`/api/products/${id}`, { price }).then(response => {
+      this.setState({
+        products: response.data
+      })
+      this.getProducts();
+    }
+    )
+  }
+  changePrice = (val) => {
+    this.setState({
+      price: val
+    })
+  }
+  giveID = (val) => {
+    this.setState({
+      id: val
+    })
+  }
+
   render() {
+  
+    console.log('this.state.products', this.state.products)
     return (
       <div className="App">
         <Header />
         <div className="main">
           <div className="mainContainer">
-            <Dashboard products={this.state.products} getProducts={() => this.getProducts()}/>
+            <Dashboard products={this.state.products} getProducts={() => this.getProducts()} updateProduct={  this.updateProduct}/>
             <Form selectProduct={this.state.selectProduct} products={this.state.products} getProducts={() => this.getProducts()}/>
+    
           </div>
         </div>
       </div>

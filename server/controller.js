@@ -29,8 +29,8 @@ module.exports = {
       },
       // Update
       update: ( req, res ) => {
-        const {name, price, imageUrl} = req.body;
-        req.app.get('db').update_product([ req.params.id, name, imageUrl, price ])
+        const { price } = req.body;
+        req.app.get('db').update_product([ req.params.id, price ])
           .then( () => res.sendStatus(200) )
           .catch( error => {
             res.status(500).send({errorMessage: "There is an error on the server"});
