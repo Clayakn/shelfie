@@ -10,8 +10,10 @@ class App extends Component {
   constructor() {
     super(); 
       this.state={
-        products:[]
+        products:[],
+        selectProduct: ''
       }
+    this.getProducts = this.getProducts.bind(this)
   }
 
   // Axios Get (Read)
@@ -23,22 +25,25 @@ class App extends Component {
     })
   }
 
+  // Axios Get (Read) to pass down to Dashboard
+  getProducts = () => {
+    axios.get('/api/products').then(response => {
+      this.setState({
+        products: response.data
+      })
+    })
+  }
+
   render() {
-    console.log('this.state.products in App.js', this.state.products)
     return (
       <div className="App">
         <Header />
-        <Dashboard products={this.state.products}/>
-        {this.state.products.map(product => {
-                return (
-                    <div key={product.id}>
-                        <h3>{product.product_name}</h3>
-                        <p>{product.price}</p>
-                        <img className="imageDisplay"src={product.image_url} alt='Product Picture'/>
-                    </div>
-                )
-            })}
-        <Form products={this.state.products} />
+        <div className="main">
+          <div className="mainContainer">
+            <Dashboard products={this.state.products} getProducts={() => this.getProducts()}/>
+            <Form selectProduct={this.state.selectProduct} products={this.state.products} getProducts={() => this.getProducts()}/>
+          </div>
+        </div>
       </div>
     );
   }

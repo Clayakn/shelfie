@@ -1,14 +1,17 @@
 .container {
     border: 1px solid black;
+    background: #3AD886;
+    max-width: 1000px;
+    max-height: 500px;
 }
 
 .form {
-    max-height: 520px; 
-    max-width: 450px;
-    border: 1px solid #3AD886;
+    height: 100%;
     display: flex; 
     flex-direction: column;
-    align-content: flex-start;
+    justify-content: space-around;
+    border: 1px solid #3AD886;
+    width: 500px;
 }
 
 .imageContainer {
@@ -23,7 +26,7 @@
 }
 
 .formInput {
-    max-width: 420px;
+    max-width: 700px;
 }
 
 .form_button_box {

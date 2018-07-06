@@ -48,6 +48,14 @@ table {
 	border-spacing: 0;
 }
 
+.mainContainer {
+	border: 1px solid black;
+	margin-top: 50px;
+	display: flex;
+	justify-content: space-around;
+	position: relative;
+	height: 100%;
+}
 
 
 

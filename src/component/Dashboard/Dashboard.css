@@ -1,4 +1,25 @@
 .imageDisplay {
 	max-height: 200px;
-	max-width: 320px;
+	max-width: 250px;
+}
+
+.productBox{
+	border: 1px solid black;
+	height: 270px;
+	width: 450px;
+	background-color: #D34735;
+	display: flex;
+}
+
+.productColumn {
+	border: 1px solid black;
+	display: flex; 
+	flex-direction: column;
+	justify-content: space-around;
+	height: 300px;
+}
+
+.productInfo {
+	display: flex;
+	flex-direction: column;
 }

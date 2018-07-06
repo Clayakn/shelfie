@@ -14,8 +14,17 @@ module.exports = {
         req.app.get('db').read_products()
           .then( products => res.status(200).send( products ) )
           .catch( error => {
-            res.status(500).send({errorMessage: "There is an error on the server"});
+            res.status(500).send({errorMessage: "There was an error on the server"});
             console.log('error', error)
           } );
       },
+      // Delete
+      delete: ( req, res ) => {
+        req.app.get('db').delete_product([ req.params.id ])
+          .then( () => res.sendStatus(200) )
+          .catch( error => {
+            res.status(500).send({errorMessage: "There was an error on the server"});
+            console.log('error', error)
+          } );
+      }
 }

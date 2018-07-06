@@ -9,7 +9,8 @@ export default class Form extends Component {
                 imageUrl: '',
                 name: '',
                 price: 0,
-                products: props.products
+                products: props.products,
+                selectProductId: props.selectProduct.id
             }
     }
 
@@ -41,12 +42,17 @@ export default class Form extends Component {
 
     addInventory = (imageUrl, name, price) => {
         axios.post('/api/products', {imageUrl, name, price}).then( response => {
-            this.setState({
-                products: response.data
-            })
+            // this.setState({
+            //     products: response.data
+            // })
         })
             this.cancel();
+            this.props.getProducts();
     }
+
+    // componentDidUpdate(id){
+
+    // }
 
     render(){
         return (
