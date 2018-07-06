@@ -8,7 +8,7 @@ export default class Dashboard extends Component {
     constructor(){
         super();
             this.state={
-                products: []
+                products: [],
             }
     }
 
@@ -17,7 +17,7 @@ export default class Dashboard extends Component {
             this.props.getProducts();
         })
     }
-    
+
     render(){
         console.log('props.products', this.props.products)
         return (
@@ -30,7 +30,7 @@ export default class Dashboard extends Component {
                             <div className="productInfo">
                                 <h3>{product.product_name}</h3>
                                 <p>{product.price}</p>
-                                <button>Edit</button>
+                                <button >Edit</button>
                                 <button onClick={() => this.deleteProduct(product.id)}>Delete</button>
                             </div>
                         </div>

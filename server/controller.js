@@ -26,5 +26,15 @@ module.exports = {
             res.status(500).send({errorMessage: "There was an error on the server"});
             console.log('error', error)
           } );
-      }
+      },
+      // Update
+      update: ( req, res ) => {
+        const {name, price, imageUrl} = req.body;
+        req.app.get('db').update_product([ req.params.id, name, imageUrl, price ])
+          .then( () => res.sendStatus(200) )
+          .catch( error => {
+            res.status(500).send({errorMessage: "There is an error on the server"});
+            console.log('error', error)
+          });
+      },
 }
