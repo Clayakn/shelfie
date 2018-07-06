@@ -1,0 +1,39 @@
+.container {
+    border: 1px solid black;
+}
+
+.form {
+    max-height: 520px; 
+    max-width: 450px;
+    border: 1px solid #3AD886;
+    display: flex; 
+    flex-direction: column;
+    align-content: flex-start;
+}
+
+.imageContainer {
+    border: 1px solid brown;
+    display: flex; 
+    justify-content: center;             
+}
+
+.imagePreview {
+    max-height: 200px; 
+    max-width: 200px;
+}
+
+.formInput {
+    max-width: 420px;
+}
+
+.form_button_box {
+    display: flex; 
+    justify-content: space-between;
+}
+
+.form_button {
+    border-radius: 5px;
+    background-color: #ED6B5A;
+    height: 32px; 
+    width: 144px;
+}
