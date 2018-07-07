@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Dashboard from './component/Dashboard/Dashboard';
 import Form from './component/Form/Form';
 import Header from './component/Header/Header';
+import { Route, Link, Switch} from 'react-router-dom';
 import axios from 'axios';
 
 import './App.css';
@@ -63,12 +64,19 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
+        <nav className='navBar'>
+          <Link to="/"> Home </Link>
+          <Link  to='/add'>Form</Link>
+        </nav>
+        <Switch>
+          <Route path='/add' component={Form}/>
+        </Switch>
         <div className="main">
           <div className="mainContainer">
             <Dashboard products={this.state.products} getProducts={() => this.getProducts()} updateProduct={  this.updateProduct}/>
             <Form selectProduct={this.state.selectProduct} products={this.state.products} getProducts={() => this.getProducts()}/>
-    
           </div>
+    
         </div>
       </div>
     );

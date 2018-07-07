@@ -43,8 +43,6 @@ export default class Dashboard extends Component {
  
 
     render(){
-        console.log('price', this.props.products.price)
-        console.log('props.products', this.props.products)
         return (
             <div>
                  {this.props.products.map(product => {
@@ -56,7 +54,7 @@ export default class Dashboard extends Component {
                                 <h3>{product.product_name}</h3>
                                 {this.state.toggle ?  <div><input value={this.state.price}  placeholder="change price" onChange={(e) => this.changePrice(e.target.value)}></input></div> : <p>{product.price}</p>}
                                 {this.state.toggle ?  <button onClick={() => this.edit(product.id)}>Save</button> :  <button onClick={() => this.toggle()}>Edit</button>}
-                                <button onClick={() => this.deleteProduct()}>Delete</button>
+                                <button onClick={() => this.deleteProduct(product.id)}>Delete</button>
                             </div>
                         </div>
                     </div>
