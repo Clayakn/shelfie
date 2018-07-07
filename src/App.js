@@ -67,8 +67,10 @@ class App extends Component {
         <nav className='navBar'>
           <Link to="/"> Home </Link>
           <Link  to='/add'>Form</Link>
+          <Link to='header'>Header</Link>
         </nav>
         <Switch>
+          <Route path='/header' component={Header}/>
           <Route path='/add' component={Form}/>
         </Switch>
         <div className="main">
