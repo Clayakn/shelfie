@@ -12,11 +12,12 @@ class App extends Component {
     super(); 
       this.state={
         products:[],
+        id: '',
+        imageUrl: '',
         price: '',
-        id: ''
+        productName: '',
+        doEdit: false
       }
-    this.getProducts = this.getProducts.bind(this)
-    this.updateProduct = this.updateProduct.bind(this)
   }
 
   // Axios Get (Read)
@@ -37,46 +38,79 @@ class App extends Component {
     })
   }
 
-  // Axios Put (Update)
-  updateProduct = (id, price) => {
-    axios.put(`/api/products/${id}`, { price }).then(response => {
-      this.setState({
-        products: response.data
-      })
-      this.getProducts();
-    }
-    )
+  handleImageChange = (val) => {
+    this.setState({imageUrl: val});
   }
-  changePrice = (val) => {
-    this.setState({
-      price: val
-    })
+  handleNameChange = (val) => {
+    this.setState({productName: val});
   }
-  giveID = (val) => {
+  handlePriceChange = (val) => {
+    this.setState({price: val});
+  }
+
+  cancel = () => {
     this.setState({
-      id: val
+        imageUrl: '',
+        productName: '',
+        price: 0,
+        doEdit: false
     })
   }
 
+  setEdit = (id) => {
+    const filteredProduct = this.state.products.filter(product => product.id === id)[0];
+      this.setState({
+        id: filteredProduct.id,
+        productName: filteredProduct.product_name,
+        price: filteredProduct.price,
+        imageUrl: filteredProduct.image_url,
+        doEdit: true
+      });
+  }
+
+  editProduct = () => {
+  const { id, doEdit, imageUrl, productName, price } = this.state; 
+  if(doEdit) {
+      axios.put(`/api/products/${id}`, { imageUrl, productName, price })
+      .then(response => {
+          this.cancel();
+          this.getProducts();
+      }).catch(error => console.log('Update Product Axios Error------------', error));
+  } 
+}
+
+deleteProduct = (id) => {
+  axios.delete(`/api/products/${id}`).then(response => {
+      this.getProducts();
+  }).catch(error => console.log('deleteProduct Axios Error--------', error))
+}
+
   render() {
-  
-    console.log('this.state.products', this.state.products)
     return (
       <div className="App">
         <Header />
         <nav className='navBar'>
-          <Link to="/"> Home </Link>
+          <Link to="/"> Dashboard </Link>
           <Link  to='/add'>Form</Link>
-          <Link to='header'>Header</Link>
         </nav>
         <Switch>
-          <Route path='/header' component={Header}/>
-          <Route path='/add' component={Form}/>
+          <Route 
+            exact path='/' 
+            render={() => <Dashboard 
+            displayProducts={this.state.products} 
+            setEdit={this.setEdit} 
+            deleteProduct={this.deleteProduct} />}
+          />
+          <Route 
+            path='/add' 
+            render={() => <Form 
+            productName={this.state.productName} price={this.state.price} imageUrl={this.state.imageUrl} cancel={this.cancel} 
+            doEdit={this.state.doEdit} getProducts={this.getProducts} handleNameChange={this.handleNameChange} handlePriceChange={this.handlePriceChange} 
+            handleImageChange={this.handleImageChange} editProduct={this.editProduct} />}
+          />
         </Switch>
         <div className="main">
           <div className="mainContainer">
-            <Dashboard products={this.state.products} getProducts={() => this.getProducts()} updateProduct={  this.updateProduct}/>
-            <Form selectProduct={this.state.selectProduct} products={this.state.products} getProducts={() => this.getProducts()}/>
           </div>
     
         </div>

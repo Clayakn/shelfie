@@ -1,0 +1,21 @@
+.imageDisplay {
+	max-height: 200px;
+	max-width: 250px;
+}
+
+.productBox{
+	border: 1px solid black;
+	height: 270px;
+	width: 450px;
+	background-color: #D34735;
+	display: flex;
+}
+
+.productInfo {
+	display: flex;
+	flex-direction: column;
+}
+
+.dashboard_button {
+	height: 50px;
+}

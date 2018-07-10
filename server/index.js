@@ -14,9 +14,9 @@ massive(process.env.CONNECTION_STRING).then(database => {
 })
 
 app.post('/api/products', c.create);
-app.get('/api/products', c.getAll);
-app.delete('/api/products/:id', c.delete);
+app.get('/api/products', c.read);
 app.put('/api/products/:id', c.update)
+app.delete('/api/products/:id', c.delete);
 
 const PORT = 3001;
 app.listen(PORT, () => { console.log(`server is running on port ${PORT}`)
