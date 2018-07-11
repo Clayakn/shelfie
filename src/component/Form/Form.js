@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import './Form.css';
 
 export default class Form extends Component {
@@ -28,8 +29,8 @@ export default class Form extends Component {
                     <p>Price:</p>
                     <input className="formInput" placeholder="Insert Price Here" onChange={e => this.props.handlePriceChange(e.target.value)} value={price}></input>
                     <div className="form_button_box">
-                        <button className="form_button" onClick={() => this.props.cancel()}>Cancel</button> 
-                        <button className="form_button" onClick={e => doEdit ? this.props.editProduct(id) : this.addInventory()}>{doEdit ? 'Save' : 'Add To Inventory'}</button>
+                        {doEdit ? <Link to='/'><button className="form_button" onClick={() => this.props.cancel()}>Cancel</button></Link> : <button className="form_button" onClick={() => this.props.cancel()}>Cancel</button>}  
+                        <Link to='/'><button className="form_button" onClick={e => doEdit ? this.props.editProduct(id) : this.addInventory()}>{doEdit ? 'Save' : 'Add To Inventory'}</button></Link>
                     </div>
                 </div>
             </div>

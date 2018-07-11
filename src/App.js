@@ -59,6 +59,7 @@ class App extends Component {
 
   setEdit = (id) => {
     const filteredProduct = this.state.products.filter(product => product.id === id)[0];
+
       this.setState({
         id: filteredProduct.id,
         productName: filteredProduct.product_name,
@@ -86,6 +87,8 @@ deleteProduct = (id) => {
 }
 
   render() {
+    console.log(this.props)
+
     return (
       <div className="App">
         <Header />
@@ -102,11 +105,11 @@ deleteProduct = (id) => {
             deleteProduct={this.deleteProduct} />}
           />
           <Route 
-            path='/add' 
-            render={() => <Form 
+            path='/add/:id' 
+            render={({location}) => <Form 
             productName={this.state.productName} price={this.state.price} imageUrl={this.state.imageUrl} cancel={this.cancel} 
             doEdit={this.state.doEdit} getProducts={this.getProducts} handleNameChange={this.handleNameChange} handlePriceChange={this.handlePriceChange} 
-            handleImageChange={this.handleImageChange} editProduct={this.editProduct} />}
+            handleImageChange={this.handleImageChange} editProduct={this.editProduct} location={location}/>}
           />
         </Switch>
         <div className="main">
